@@ -17,6 +17,7 @@ function MovieDetails({
   const countRef = useRef(0);
 
   const isWatched = watched.map((movie) => movie.imdbID).includes(selectedId);
+
   const watchedUserRating = watched.find(
     (movie) => movie.imdbID === selectedId
   )?.userRating;
@@ -106,7 +107,6 @@ function MovieDetails({
             <div className="rating">
               {!isWatched ? (
                 <>
-                  {" "}
                   <StarRating
                     maxRating={10}
                     size={24}

@@ -18,7 +18,6 @@ const KEY = "5c1f3186";
 
 function App() {
   const [query, setQuery] = useState("");
-  const { movies, isLoading, error } = useMovies(query);
   const {
     handelSelectMovie,
     watched,
@@ -27,7 +26,7 @@ function App() {
     handleAddWatched,
     handelDeleteWatched,
   } = useFunctions();
-
+  const { movies, isLoading, error } = useMovies(query, handelCloseMovie);
   return (
     <>
       <Navbar>
@@ -39,10 +38,10 @@ function App() {
         <Box>
           {/*isLoading ? <Loader /> : <MovieList movies={movies} />*/}
           {isLoading && <Loader />}
+          {error && <ErrorMessage message={error} />}
           {!isLoading && !error && (
             <MovieList movies={movies} onSelectMovie={handelSelectMovie} />
           )}
-          {error && <ErrorMessage message={error} />}
         </Box>
         <Box>
           {selectedId ? (
